@@ -6,3 +6,13 @@
  :name
  (fn [db]
    (:name db)))
+
+(re-frame/reg-sub
+ :pos
+ (fn [db]
+   (:pos db)))
+
+(re-frame/reg-sub
+ :dir
+ (fn [db]
+   (:dir db)))
