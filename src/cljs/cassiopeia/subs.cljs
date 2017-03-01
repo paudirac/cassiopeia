@@ -13,6 +13,16 @@
    (:pos db)))
 
 (re-frame/reg-sub
+ :x
+ (fn [db]
+   (first (:pos db))))
+
+(re-frame/reg-sub
+ :y
+ (fn [db]
+   (second (:pos db))))
+
+(re-frame/reg-sub
  :dir
  (fn [db]
    (:dir db)))
