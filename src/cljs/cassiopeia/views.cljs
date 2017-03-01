@@ -1,6 +1,7 @@
 (ns cassiopeia.views
   (:require [re-frame.core :as re-frame]
-            [cassiopeia.config :as conf]))
+            [cassiopeia.config :as conf]
+            [cassiopeia.api :as api]))
 
 (defn relative-coord [c comp]
   (let [tot (comp conf/size)
@@ -44,10 +45,16 @@
                 " Direction:" @dir)]
        [:p (str "x: " @x " y: " @y)]])))
 
+(defn button-for [name handler]
+  [:button {:on-click #(handler)} name])
+
 (defn main-panel []
   (let [name (re-frame/subscribe [:name])]
     (fn []
       [:div
        [:div "Hello from " @name]
+       (button-for "Left" api/left)
+       (button-for "Right" api/right)
+       (button-for "Advance" api/advance)
        [position]
        [field]])))

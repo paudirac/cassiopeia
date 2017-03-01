@@ -20,7 +20,6 @@
    (let [pos (:pos db)
          dir (:dir db)
          next (coords/advance pos dir)]
-     (.info js/console "next" (str next))
      (assoc db :pos next))))
 
 (re-frame/reg-event-db
