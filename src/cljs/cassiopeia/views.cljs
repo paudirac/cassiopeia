@@ -18,6 +18,7 @@
     [-1 0] "img/left.png"
     [0 -1] "img/down.png"
     [1 0] "img/right.png"} dir))
+
 (defn turtle []
   (let [x (re-frame/subscribe [:x])
         y (re-frame/subscribe [:y])
