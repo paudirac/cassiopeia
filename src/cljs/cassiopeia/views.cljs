@@ -15,15 +15,14 @@
 (defn turtle []
   (let [x (re-frame/subscribe [:x])
         y (re-frame/subscribe [:y])
-        left (xpx x)
-        top (ypx y)]
+        left (xpx @x)
+        top (ypx @y)]
     [:div {:style {:width (str (:width conf/turtle-size) "px")
                    :height (str (:height conf/turtle-size) "px")
                    :background "#000"
                    :position "absolute"
                    :left (str left "px")
-                   :top (str top "px")}}
-     left]))
+                   :top (str top "px")}}]))
 
 (defn field []
   (let [width (str (:width conf/size) "px")
@@ -36,11 +35,14 @@
 
 (defn position []
   (let [pos (re-frame/subscribe [:pos])
-        dir (re-frame/subscribe [:dir])]
+        dir (re-frame/subscribe [:dir])
+        x (re-frame/subscribe [:x])
+        y (re-frame/subscribe [:y])]
     (fn []
       [:div
        [:p (str "Position: " @pos
-                " Direction:" @dir)]])))
+                " Direction:" @dir)]
+       [:p (str "x: " @x " y: " @y)]])))
 
 (defn main-panel []
   (let [name (re-frame/subscribe [:name])]
