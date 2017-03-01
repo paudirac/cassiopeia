@@ -13,17 +13,25 @@
 (defn xpx [x] (relative-coord x :width))
 (defn ypx [y] (relative-coord y :height))
 
+(defn turtle-img [dir]
+  ({[0 1] "img/up.png"
+    [-1 0] "img/left.png"
+    [0 -1] "img/down.png"
+    [1 0] "img/right.png"} dir))
 (defn turtle []
   (let [x (re-frame/subscribe [:x])
         y (re-frame/subscribe [:y])
         left (xpx @x)
-        top (ypx @y)]
+        top (ypx @y)
+        dir (re-frame/subscribe [:dir])]
     [:div {:style {:width (str (:width conf/turtle-size) "px")
                    :height (str (:height conf/turtle-size) "px")
-                   :background "#000"
                    :position "absolute"
                    :left (str left "px")
-                   :top (str top "px")}}]))
+                   :top (str top "px")}}
+     [:img {:src (turtle-img @dir)
+            :width "200px"
+            :height "200px"}]]))
 
 (defn field []
   (let [width (str (:width conf/size) "px")
